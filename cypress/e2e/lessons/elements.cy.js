@@ -6,7 +6,6 @@ describe("Elementos comuns", () => {
         cy.visit('https://www.wcaquino.me/cypress/componentes.html')
     });
     
-
     beforeEach(() => { //vai executar antes de cada um dos tests
         cy.visit('https://www.wcaquino.me/cypress/componentes.html')
     });
@@ -102,7 +101,7 @@ describe("Elementos comuns", () => {
     })
 
     it("Campo combobox", () => {
-        
+
         cy.get('[data-test="dataEscolaridade"]')
             .select("2grauincomp")
             .should('have.value', '2grauincomp')
