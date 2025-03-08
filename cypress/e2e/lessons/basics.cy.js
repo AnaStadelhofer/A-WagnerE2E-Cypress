@@ -18,6 +18,27 @@ describe('Cypress Basico', () => {
       .and('contain', 'Treinamento') // faz apenas uma busca para a assertiva *no lugar do and também pode o should
       
   })
+
+  it.only("Escrever o título da página em um campo", () => {
+    cy.visit('https://www.wcaquino.me/cypress/componentes.html')
+
+    let title
+
+    cy.title().then(el => {
+      cy.get("#formNome").type(el)
+
+      title = el
+    })
+
+    cy.get('[data-cy="dataSobrenome"]').then($el => {
+      $el.val(title)
+    })
+
+    cy.get('#elementosForm\\:sugestoes').then($el => {
+      cy.wrap($el).type(title)
+    })
+    
+  })
 })
 
 describe('Encontrar elementos e interagir', () => {
@@ -39,3 +60,5 @@ describe('Debug e pause', () => {
 
   })
 })
+
+

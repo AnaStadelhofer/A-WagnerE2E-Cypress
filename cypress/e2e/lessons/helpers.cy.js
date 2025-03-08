@@ -29,10 +29,11 @@ describe('Helpers', () => {
 
         cy.get('#buttonSimple').then(() => console.log('Campo 1'))
         cy.wrap(promise).then(ret => console.log(ret))
+        cy.wrap(promise).should('eq', 10)
         cy.get('#buttonList').then(() => console.log('Campo 2'))
     })
 
-    it.only('Its', () => {
+    it('Its', () => {
 
         const obj = {
             nome: 'Ana',
@@ -69,6 +70,17 @@ describe('Helpers', () => {
         cy.title()
             .its('length')
             .should('be.equal', 20)
+    })
+
+    it.only("Invoke", () => {
+        const getValue =  () => 1;
+        const soma = (a, b) => a + b;
+
+    cy.wrap({ fn: getValue }).invoke('fn').should('be.equal', 1)
+    cy.wrap({ fn: soma }).invoke('fn', 2, 3).should('be.equal', 5)
+
+    cy.get('#formNome').invoke("val", "Texto via invoke")
+    cy.window().invoke('alert', "Dá pra ver o alert?")
     })
 
 })

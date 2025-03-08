@@ -110,15 +110,21 @@ describe("Elementos comuns", () => {
             .select("2o grau incompleto")
             .should('have.value', '2grauincomp')
 
-
+        cy.get('[data-test="dataEscolaridade"] option').should('have.lenght', 8)
     })
 
-    it("Campo combo múltiplo", () => {
+    it.only("Campo combo múltiplo", () => {
 
         cy.get('[data-testid="dataEsportes"]')
-            .select(['natacao', 'Corrida', 'nada'])
+            .select(['natacao', 'Corrida'])
 
-        cy.get('[data-testid="dataEsportes"]')
-            .select('nada')
+        //cy.get('[data-testid="dataEsportes"]').select('nada')
+
+        cy.get('[data-testid="dataEsportes"]').then($el => {
+            expect($el.val()).to.be.deep.equal(['natacao', 'Corrida'])
+            expect($el.val()).to.have.length(2)
+        })
+
+        cy.get('[data-testid="dataEsportes"]').invoke('val').should('eql', ['natacao', 'Corrida'])
     })
 })
